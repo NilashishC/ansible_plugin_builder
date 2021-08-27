@@ -1,0 +1,7 @@
+# basic vars to make the templates cleaner
+copyright: "Copyright {{ ansible_date_time.year }} Red Hat"
+version_added: "1.0.0"
+
+parent_directory: "{{ collection_path }}/plugins"
+
+import_path: "ansible_collections.{{ collection_org|default('') }}.{{ collection_name|default('') }}.plugins.module_utils.network"

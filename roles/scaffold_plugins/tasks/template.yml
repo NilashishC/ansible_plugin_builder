@@ -1,0 +1,23 @@
+- debug:
+    msg: "Scaffolding {{ plugin['name'] }} of type {{ plugin['type'] }}"
+
+- name: Check to see if the file exists
+  ansible.builtin.stat:
+    path: "{{ parent_directory }}/{{ plugin['type'] }}/{{ plugin['name'] }}.py"
+  register: file_stat
+
+- name: Load docstring (if specified)
+  set_fact:
+    docstring: "{{ lookup('file',  '{{ plugin.docstring }}') }}"
+  when: "'docstring' in plugin"
+
+- name: Create the file, if it doesnt exist already or override is set
+  ansible.builtin.template:
+    src: "{{ plugin['type'] }}.py.j2"
+    dest: "{{ parent_directory }}/{{ plugin['type'] }}/{{ plugin['name'] }}.py"
+  when: "not file_stat.stat.exists or plugin['overwrite']|default(False)"
+
+- name: Empty docstring
+  set_fact:
+    docstring: ''
+  when: "'docstring' in plugin"

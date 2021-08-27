@@ -1,0 +1,12 @@
+directories:
+  - plugins/modules
+  - plugins/module_utils
+  - plugins/plugin_utils
+  - plugins/filter
+  - plugins/action
+  - plugins/inventory
+  - plugins/cache
+  - plugins/test
+  - docs
+  - meta
+  - tests
