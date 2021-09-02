@@ -28,6 +28,7 @@
                             "action",
                             "filter",
                             "test",
+                            "lookup",
                             "module"
                         ]
                     },

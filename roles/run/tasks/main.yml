@@ -12,10 +12,10 @@
 
 - name: Start Scaffolding
   include_role:
-    name: "{{ builder_roles }}"
+    name: "{{ builder_role }}"
   loop:
     - init
     - scaffold_plugins
   loop_control:
-    loop_var: builder_roles
+    loop_var: builder_role
   when: not result.failed

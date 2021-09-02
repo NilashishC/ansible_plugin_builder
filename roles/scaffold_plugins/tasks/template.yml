@@ -8,14 +8,28 @@
 
 - name: Load docstring (if specified)
   set_fact:
-    docstring: "{{ lookup('file',  '{{ plugin.docstring }}') }}"
+    docstring: "{{ lookup('file', '{{ plugin.docstring }}') }}"
   when: "'docstring' in plugin"
 
-- name: Create the file, if it doesnt exist already or override is set
+- name: Create the plugin file, if it doesnt exist already or override is set
   ansible.builtin.template:
     src: "{{ plugin['type'] }}.py.j2"
     dest: "{{ parent_directory }}/{{ plugin['type'] }}/{{ plugin['name'] }}.py"
   when: "not file_stat.stat.exists or plugin['overwrite']|default(False)"
+
+- name: Scaffold additional files (depending on plugin type)
+  block:
+  - name: Check to see if the module_utils exist
+    ansible.builtin.stat:
+      path: "{{ parent_directory }}/module_utils/common/{{ plugin['name'] }}.py"
+    register: file_stat
+
+  - name: Create module_utils
+    ansible.builtin.template:
+      src: "module_utils/common/plugin.py.j2"
+      dest: "{{ parent_directory }}/module_utils/common/{{ plugin['name'] }}.py"
+    when: not file_stat.stat.exists
+  when: plugin['type'] in ["filter", "lookup", "test"]
 
 - name: Empty docstring
   set_fact:
