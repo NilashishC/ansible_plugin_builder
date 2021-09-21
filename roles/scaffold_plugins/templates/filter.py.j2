@@ -27,7 +27,7 @@ from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_valid
 )
 
 def _{{ plugin.name }}(*args, **kwargs):
-    keys = []
+    keys = {{ (docstring|from_yaml)["options"].keys() }}
     data = dict(zip(keys, args))
     data.update(kwargs)
     aav = AnsibleArgSpecValidator(

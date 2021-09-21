@@ -27,8 +27,8 @@ RETURN = """
 
 def _{{ plugin.name }}():
     """Implementation for {{ plugin.name }}"""
-
-    params = {} # TO-DO: Add plugin params in key-value format
+    # TO-DO: Remove quotes from the dict values for `params`
+    params = {{ dict((docstring|from_yaml)["options"].keys() | zip((docstring|from_yaml)["options"].keys())) }}
     _validate_args("{{ plugin.name }}", DOCUMENTATION, params)
 
     # implement test logic here
