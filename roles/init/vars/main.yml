@@ -1,7 +1,7 @@
 directories:
   - plugins/modules
   - plugins/module_utils
-  - plugins/module_utils/common
+  - plugins/module_utils/common/
   - plugins/plugin_utils
   - plugins/lookup
   - plugins/filter

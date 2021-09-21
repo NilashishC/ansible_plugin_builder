@@ -45,7 +45,7 @@
                 "required": [
                     "name",
                     "type",
-                    "docstring",
+                    "docstring"
                 ],
                 "additionalProperties": false
             }
