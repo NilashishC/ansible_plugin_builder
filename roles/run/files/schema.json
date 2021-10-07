@@ -1,0 +1,60 @@
+{
+    "description": "JSON Schema for Ansible Plugin Builder MANIFEST",
+    "title": "Ansible Plugin Builder MANIFEST Schema",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "collection_path": {
+            "type": "string"
+        },
+        "collection_org": {
+            "type": "string"
+        },
+        "collection_name": {
+            "type": "string"
+        },
+        "license_file": {
+            "type": "string"
+        },
+        "plugins": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "cache",
+                            "action",
+                            "filter",
+                            "test",
+                            "lookup",
+                            "module"
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "docstring": {
+                        "type": "string"
+                    },
+                    "overwrite": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "name",
+                    "type",
+                    "docstring"
+                ],
+                "additionalProperties": false
+            }
+        }
+    },
+    "required": [
+        "collection_path",
+        "collection_org",
+        "collection_name"
+    ],
+    "additionalProperties": false
+}
